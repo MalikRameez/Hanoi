@@ -140,3 +140,53 @@ PrintAC:
 	lw $a0, 0($sp)
 	addi $sp, $sp, 4
 	j hanoi2
+	
+	FromB:
+	beq $a3, $t3, PrintBA	#Source is B, Dest is A
+	beq $a3, $t5, PrintBC	#Source is B, Dest is C
+
+PrintBA:
+	addi $sp, $sp, -4
+	sw $a0, 0($sp)		#save a0
+	li  $v0, 4 #Print the Move from B to A
+	la  $a0, BA
+	syscall
+	lw $a0, 0($sp)
+	addi $sp, $sp, 4
+	j hanoi2
+PrintBC:
+	addi $sp, $sp, -4
+	sw $a0, 0($sp)		#save a0
+	li  $v0, 4 #Print the Move from B to C
+	la  $a0, BC
+	syscall
+	lw $a0, 0($sp)
+	addi $sp, $sp, 4
+	j hanoi2
+FromC:
+	beq $a3, $t3, CA	#Source is C, Dest is A
+	beq $a3, $t4, CB	#Source is C, Dest is B
+	
+PrintCA:
+	addi $sp, $sp, -4
+	sw $a0, 0($sp)		#save a0
+	li  $v0, 4 #Print the Move from C to A
+	la  $a0, CA
+	syscall
+	lw $a0, 0($sp)
+	addi $sp, $sp, 4
+	j hanoi2
+
+PrintCB:
+	addi $sp, $sp, -4
+	sw $a0, 0($sp)		#save a0
+	li  $v0, 4 #Print the Move from C to B
+	la  $a0, CB
+	syscall
+	lw $a0, 0($sp)
+	addi $sp, $sp, 4
+	j hanoi2
+
+	
+End:
+	jr $ra
